@@ -1,6 +1,35 @@
-<section>
-	Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore neque, accusamus possimus
-	repellendus ipsa distinctio blanditiis earum voluptate omnis quod alias illo quis. Aliquam
-	incidunt in consectetur assumenda, quod illo possimus suscipit molestias. Quaerat molestias hic,
-	aspernatur repellat ipsam sit at sapiente nulla nostrum ullam quae voluptatum ut, temporibus quod!
+<script lang="ts">
+	import { browser } from '$app/environment';
+	import GoalFormModal from '$lib/modals/GoalFormModal.svelte';
+	import {
+		modalStore,
+		type ModalComponent,
+		type ModalSettings,
+		Modal
+	} from '@skeletonlabs/skeleton';
+	import { Icon, Plus } from 'svelte-hero-icons';
+
+	function modalComponentForm(): void {
+		const c: ModalComponent = { ref: GoalFormModal };
+		const modal: ModalSettings = {
+			type: 'component',
+			component: c,
+			title: 'Custom Form Component'
+		};
+
+		if (browser) {
+			modalStore.trigger(modal);
+		}
+	}
+</script>
+
+<section class="p-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+	<button
+		class="card inline-flex justify-center items-center py-2 card-hover"
+		on:click={modalComponentForm}
+	>
+		<Icon src={Plus} size="24" />
+	</button>
 </section>
+
+<Modal />
